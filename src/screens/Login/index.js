@@ -44,49 +44,31 @@ const Login = ({ login, updateLogin, navigation }) => {
     }
   }
 
-  const keyboardWillShow = event => {
-    console.log(event)
-    setShrinkLogo(true)
-  }
-
-  const keyboardWillHide = event => {}
-
-  useEffect(() => {
-    const keyboardWillShowSub = Keyboard.addListener(
-      'keyboardWillShow',
-      keyboardWillShow
-    )
-  }, [])
-
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'undefined'}
-      style={styles.containerForm}
+    <LinearGradient
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
+      colors={[colors.darkGray, colors.silverBlue, colors.darkGray]}
+      style={styles.container}
     >
-      <LinearGradient
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        colors={[colors.darkGray, colors.silverBlue, colors.darkGray]}
-        style={styles.container}
-      >
-        <SafeAreaView style={styles.containerSafeArea}>
-          <ModalError
-            testID="modalLoginError"
-            testIDButtonOk="buttonOkModalLoginError"
-            isVisible={showModalError}
-            title="Ops!"
-            message={`Seu cadastro não foi encontrado, \n passa no RH!`}
-            onPressClose={() => setShowModalError(false)}
-          />
-          {/* <KeyboardAvoidingView
-            behavior={Platform.OS === 'ios' ? 'padding' : 'undefined'}
-            style={styles.containerForm}
-          > */}
+      <SafeAreaView style={styles.containerSafeArea}>
+        <ModalError
+          testID="modalLoginError"
+          testIDButtonOk="buttonOkModalLoginError"
+          isVisible={showModalError}
+          title="Ops!"
+          message={`Seu cadastro não foi encontrado, \n passa no RH!`}
+          onPressClose={() => setShowModalError(false)}
+        />
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'undefined'}
+          style={styles.containerForm}
+        >
           <View style={styles.containerLogo}>
             <Image
               source={images.logo}
               style={styles.logo}
-              resizeMode={shrinkLogo ? 'center' : 'contain'}
+              resizeMode="contain"
             />
           </View>
 
@@ -134,23 +116,21 @@ const Login = ({ login, updateLogin, navigation }) => {
               </View>
             )}
           </Formik>
-          {/* </KeyboardAvoidingView> */}
-
-          {/* <View style={styles.optionButton}>
-          <View>
-            <Link>
-              <Text style={{ color: colors.white }}>Como funciona</Text>
-            </Link>
+          <View style={styles.optionButton}>
+            <View>
+              <Link>
+                <Text style={{ color: colors.white }}>Como funciona</Text>
+              </Link>
+            </View>
+            <View>
+              <Link>
+                <Text style={{ color: colors.white }}>Recuperar senha</Text>
+              </Link>
+            </View>
           </View>
-          <View>
-            <Link>
-              <Text style={{ color: colors.white }}>Recuperar senha</Text>
-            </Link>
-          </View>
-        </View> */}
-        </SafeAreaView>
-      </LinearGradient>
-    </KeyboardAvoidingView>
+        </KeyboardAvoidingView>
+      </SafeAreaView>
+    </LinearGradient>
   )
 }
 

@@ -1,6 +1,34 @@
 import { StyleSheet } from 'react-native'
 import colors from '../../constants/colors'
 
+const input = () => {
+  return {
+    backgroundColor: colors.white,
+    padding: 7,
+    borderRadius: 30,
+    fontSize: 16,
+  }
+}
+
+const button = () => {
+  return {
+    padding: 10,
+    marginTop: 15,
+    borderRadius: 30,
+    borderWidth: 1,
+    borderColor: colors.white,
+  }
+}
+
+const buttonText = () => {
+  return {
+    textAlign: 'center',
+    textTransform: 'uppercase',
+    fontSize: 14,
+    color: colors.white,
+  }
+}
+
 export default StyleSheet.create({
   container: {
     flex: 1,
@@ -10,72 +38,28 @@ export default StyleSheet.create({
     flex: 1,
   },
   containerLogo: {
-    flex: 1,
     alignItems: 'center',
   },
-  logo: {
-    width: '75%',
-    height: 200,
-    marginTop: '10%',
-  },
   containerForm: {
-    flex: 1,
     marginHorizontal: 15,
     justifyContent: 'center',
-    paddingBottom: 10,
   },
-  emailField: {
-    backgroundColor: colors.white,
-    padding: 7,
-    marginTop: 3,
-    borderRadius: 30,
-    fontSize: 16,
-  },
-  passwordField: {
-    backgroundColor: colors.white,
-    padding: 7,
-    marginTop: 10,
-    borderRadius: 30,
-    fontSize: 16,
-  },
-  containerButtons: {
-    flex: 2,
-  },
-  loginButtonText: {
-    textAlign: 'center',
-    textTransform: 'uppercase',
-    fontSize: 14,
-    color: colors.white,
-  },
+  emailField: { ...input() },
+  passwordField: { ...input(), marginTop: 20 },
+  loginButtonText: { ...buttonText() },
   loginButton: {
     backgroundColor: colors.lightblue,
-    padding: 10,
-    marginTop: 15,
-    borderRadius: 30,
-    borderWidth: 1,
-    borderColor: colors.white,
+    ...button(),
   },
-  registerButtonText: {
-    textAlign: 'center',
-    textTransform: 'uppercase',
-    fontSize: 14,
-    color: colors.white,
-  },
+  registerButtonText: { ...buttonText() },
   registerButton: {
     backgroundColor: colors.limeGreen,
-    padding: 10,
-    marginTop: 15,
-    borderRadius: 30,
-    borderWidth: 1,
-    borderColor: colors.white,
+    ...button(),
   },
-  // optionButton: {
-  //   position: 'absolute',
-  //   bottom: 150,
-  //   width: '100%',
-  //   flex: 1,
-  //   flexDirection: 'row',
-  //   justifyContent: 'space-between',
-  //   padding: 35,
-  // },
+  optionButton: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 35,
+  },
 })
