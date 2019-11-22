@@ -3,7 +3,7 @@ import ModalError from 'boilerplate_app/src/components/Modal/ModalError'
 import colors from 'boilerplate_app/src/constants/colors'
 import images from 'boilerplate_app/src/constants/images'
 import Link from 'boilerplate_app/src/components/Link'
-import { Formik } from 'formik'
+import { Formik, FieldArray, Field } from 'formik'
 import React, { useState } from 'react'
 import {
   Image,
@@ -19,10 +19,18 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as Yup from 'yup'
 import styles from './styles'
+import {
+  containerCenter,
+  containerLogo,
+  containerForm,
+  containerSafeArea,
+  buttonText,
+  button,
+  label,
+  input,
+} from '../../shared/style/sharedStyles'
 import { LoginCreators } from 'boilerplate_app/src/store/ducks/login'
-import cpf from '../../utils/masks/cpf'
-import telefone from '../../utils/masks/telefone'
-import date from '../../utils/masks/date'
+import { directive } from '@babel/types'
 
 const Login = ({ updateLogin }) => {
   const [showModalError, setShowModalError] = useState(false)
@@ -36,107 +44,121 @@ const Login = ({ updateLogin }) => {
     senha: Yup.string().required(),
     confirmacao: Yup.string().required(),
   })
+
+  const registerForm = [
+    {
+      key: 1,
+      field: 'name',
+      name: 'Nome',
+      keyboardType: 'text',
+    },
+    {
+      key: 2,
+      field: 'birthDate',
+      name: 'Data de nascimento',
+      keyboardType: 'text',
+    },
+    {
+      key: 3,
+      field: 'email',
+      name: 'E-mail',
+      keyboardType: 'text',
+    },
+    {
+      key: 4,
+      field: 'cpf',
+      name: 'CPF',
+      keyboardType: 'text',
+    },
+    {
+      key: 5,
+      field: 'cellphone',
+      name: 'Celular',
+      keyboardType: 'text',
+    },
+  ]
+
+  const _formFields = formikProps => {
+    return registerForm.map(({ key, field, name, keyboardType }) => {
+      return (
+        <View key={key}>
+          <Text style={label()}>{name}</Text>
+          <FormikTextInput
+            name={field}
+            keyboardType={keyboardType}
+            {...formikProps}
+            style={input()}
+            errorStyle={{ borderBottomColor: '#FF4140' }}
+          />
+        </View>
+      )
+    }, formikProps)
+  }
+
   const requestRegister = async () => {
     updateLogin({
       token: 't=este',
     })
   }
+
   return (
     <LinearGradient
-      colors={[colors.white, colors.lightblue]}
-      style={styles.container}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
+      colors={[colors.darkGray, colors.silverBlue, colors.darkGray]}
+      style={containerCenter()}
     >
-      <SafeAreaView style={styles.containerSafeArea}>
-        <KeyboardAvoidingView behavior={'padding'}>
-          <ScrollView showsVerticalScrollIndicator={false}>
-            <ModalError
-              isVisible={showModalError}
-              title="Ops!"
-              message={`Seu cadastro não foi encontrado, \n passa no RH!`}
-              onPressClose={() => setShowModalError(false)}
+      <SafeAreaView style={containerSafeArea()}>
+        {/* <KeyboardAvoidingView behavior={'padding'}> */}
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <ModalError
+            isVisible={showModalError}
+            title="Ops!"
+            message={`Seu cadastro não foi encontrado, \n passa no RH!`}
+            onPressClose={() => setShowModalError(false)}
+          />
+          <View style={containerLogo()}>
+            <Image
+              source={images.logo}
+              style={styles.logo}
+              resizeMode="contain"
             />
-            <View style={styles.containerLogo}>
-              <Image
-                source={images.logo}
-                style={styles.logo}
-                resizeMode="contain"
-              />
-            </View>
-            <View style={styles.containerForm}>
-              <Formik
-                initialValues={{ email: '', senha: '' }}
-                onSubmit={requestRegister}
-                validationSchema={LoginSchema}
-              >
-                {formikProps => (
+          </View>
+          <View style={containerForm()}>
+            <Formik
+              initialValues={{
+                name: '',
+                birthDate: '',
+                email: '',
+                cpf: '',
+                cell: '',
+              }}
+              onSubmit={requestRegister}
+              validationSchema={LoginSchema}
+            >
+              {formikProps => (
+                <>
+                  <FieldArray
+                    name="fields"
+                    render={() => _formFields(formikProps)}
+                  />
                   <View>
-                    <Text style={styles.label}>Email</Text>
-                    <FormikTextInput
-                      name="email"
-                      keyboardType="email-address"
-                      {...formikProps}
-                      style={styles.emailField}
-                      errorStyle={{ borderBottomColor: '#FF4140' }}
-                    />
-                    <Text style={styles.label}>CPF</Text>
-                    <FormikTextInput
-                      name="cpf"
-                      keyboardType="numeric"
-                      {...formikProps}
-                      mask={cpf}
-                      style={styles.emailField}
-                      errorStyle={{ borderBottomColor: '#FF4140' }}
-                    />
-                    <Text style={styles.label}>Telefone</Text>
-                    <FormikTextInput
-                      name="telefone"
-                      keyboardType="numeric"
-                      {...formikProps}
-                      mask={telefone}
-                      style={styles.emailField}
-                      errorStyle={{ borderBottomColor: '#FF4140' }}
-                    />
-                    <Text style={styles.label}>Data de nascimento</Text>
-                    <FormikTextInput
-                      name="nascimento"
-                      keyboardType="numeric"
-                      {...formikProps}
-                      mask={date}
-                      style={styles.emailField}
-                      errorStyle={{ borderBottomColor: '#FF4140' }}
-                    />
-                    <Text style={styles.label}>Senha</Text>
-                    <FormikTextInput
-                      name="senha"
-                      secureTextEntry
-                      {...formikProps}
-                      style={styles.passwordField}
-                      errorStyle={{ borderBottomColor: '#FF4140' }}
-                    />
-                    <Text style={styles.label}>Confirmação</Text>
-                    <FormikTextInput
-                      name="confirmacao"
-                      secureTextEntry
-                      {...formikProps}
-                      style={styles.passwordField}
-                      errorStyle={{ borderBottomColor: '#FF4140' }}
-                    />
                     <TouchableOpacity
                       onPress={formikProps.handleSubmit}
-                      style={styles.registerButton}
+                      style={button(colors.lightblue)}
                     >
-                      <Text style={styles.registerButtonText}>Registrar</Text>
+                      <Text style={buttonText()}>Registrar</Text>
                     </TouchableOpacity>
-                    <Link to="Login">
-                      <Text style={styles.backButtonText}>Voltar</Text>
+                    <Link style={button()} to="Login">
+                      <Text style={buttonText()}>Voltar</Text>
                     </Link>
                   </View>
-                )}
-              </Formik>
-            </View>
-            <View style={styles.containerButtons}></View>
-          </ScrollView>
-        </KeyboardAvoidingView>
+                </>
+              )}
+            </Formik>
+          </View>
+        </ScrollView>
+        {/* </KeyboardAvoidingView> */}
       </SafeAreaView>
     </LinearGradient>
   )

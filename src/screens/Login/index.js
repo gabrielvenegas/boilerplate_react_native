@@ -13,18 +13,25 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Keyboard,
 } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as Yup from 'yup'
 import styles from './styles'
-import userService from '../../services/userService'
+import {
+  containerCenter,
+  containerLogo,
+  containerSafeArea,
+  containerForm,
+  buttonText,
+  button,
+  input,
+} from '../../shared/style/sharedStyles'
+import authService from '../../services/authService'
 
 const Login = ({ login, updateLogin, navigation }) => {
   const [showModalError, setShowModalError] = useState(false)
-  const [shrinkLogo, setShrinkLogo] = useState(false)
   const LoginSchema = Yup.object().shape({
     email: Yup.string()
       .email()
@@ -34,7 +41,7 @@ const Login = ({ login, updateLogin, navigation }) => {
 
   const requestLogin = async ({ email, senha }) => {
     try {
-      const { token } = await userService.login(email, senha)
+      const { token } = await authService.login(email, senha)
       updateLogin({
         token,
       })
@@ -49,9 +56,9 @@ const Login = ({ login, updateLogin, navigation }) => {
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
       colors={[colors.darkGray, colors.silverBlue, colors.darkGray]}
-      style={styles.container}
+      style={containerCenter()}
     >
-      <SafeAreaView style={styles.containerSafeArea}>
+      <SafeAreaView style={containerSafeArea()}>
         <ModalError
           testID="modalLoginError"
           testIDButtonOk="buttonOkModalLoginError"
@@ -62,9 +69,9 @@ const Login = ({ login, updateLogin, navigation }) => {
         />
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'undefined'}
-          style={styles.containerForm}
+          style={containerForm()}
         >
-          <View style={styles.containerLogo}>
+          <View style={containerLogo()}>
             <Image
               source={images.logo}
               style={styles.logo}
@@ -85,7 +92,7 @@ const Login = ({ login, updateLogin, navigation }) => {
                   name="email"
                   keyboardType="email-address"
                   {...formikProps}
-                  style={styles.emailField}
+                  style={input()}
                   errorStyle={{ borderBottomColor: '#FF4140' }}
                   placeholder="E-mail"
                 />
@@ -101,17 +108,17 @@ const Login = ({ login, updateLogin, navigation }) => {
                 />
                 <TouchableOpacity
                   testID="loginButton"
-                  style={styles.loginButton}
+                  style={button(colors.lightblue)}
                   onPress={formikProps.handleSubmit}
                 >
-                  <Text style={styles.loginButtonText}>Entrar</Text>
+                  <Text style={buttonText()}>Entrar</Text>
                 </TouchableOpacity>
                 <Link
                   testID="registerButton"
                   to="Register"
-                  style={styles.registerButton}
+                  style={button(colors.limeGreen)}
                 >
-                  <Text style={styles.registerButtonText}>Registrar</Text>
+                  <Text style={buttonText()}>Registrar</Text>
                 </Link>
               </View>
             )}
