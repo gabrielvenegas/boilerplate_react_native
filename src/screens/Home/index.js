@@ -1,14 +1,23 @@
-import React, { Component } from 'react'
-import { Text, Button, View } from 'react-native'
+import React from 'react'
+import { View, StatusBar } from 'react-native'
 import { DrawerActions } from 'react-navigation-drawer'
+import { Header } from 'react-native-elements'
+import style from './style'
+import colors from '../../constants/colors'
+import TopLogo from '../../components/TopLogo'
 
-const openMenu = (navigation, item) => {
-  navigation.dispatch(DrawerActions.toggleDrawer())
+const renderTopLogoComponent = () => {
+  return <TopLogo />
 }
-const Home = ({ navigation }) => (
+const Home = () => (
   <View>
-    <Text>Main</Text>
-    <Button onPress={() => openMenu(navigation)} title="Detail Page" />
+    <StatusBar backgroundColor={colors.silverBlue} barStyle="light-content" />
+    <Header
+      leftComponent={{ icon: 'menu', color: '#fff' }}
+      centerComponent={() => renderTopLogoComponent()}
+      containerStyle={style.header}
+    ></Header>
+    <View></View>
   </View>
 )
 
