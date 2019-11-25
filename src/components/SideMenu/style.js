@@ -6,11 +6,11 @@ const style = StyleSheet.create({
     flex: 1,
   },
   navItem: {
-    borderBottomWidth: 0.3,
-    borderBottomColor: '#bdc0c2',
+    borderBottomWidth: 0.5,
+    borderBottomColor: '#eaeaea',
     padding: 10,
     width: '100%',
-    height: 50,
+    height: 55,
   },
   navItemText: {
     paddingTop: 6,
