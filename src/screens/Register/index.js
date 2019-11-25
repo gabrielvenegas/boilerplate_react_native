@@ -3,7 +3,7 @@ import ModalError from 'boilerplate_app/src/components/Modal/ModalError'
 import colors from 'boilerplate_app/src/constants/colors'
 import images from 'boilerplate_app/src/constants/images'
 import Link from 'boilerplate_app/src/components/Link'
-import { Formik, FieldArray, Field } from 'formik'
+import { Formik, FieldArray } from 'formik'
 import React, { useState } from 'react'
 import {
   Image,
@@ -12,7 +12,6 @@ import {
   TouchableOpacity,
   View,
   ScrollView,
-  KeyboardAvoidingView,
 } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import { connect } from 'react-redux'
@@ -30,19 +29,17 @@ import {
   input,
 } from '../../shared/style/sharedStyles'
 import { LoginCreators } from 'boilerplate_app/src/store/ducks/login'
-import { directive } from '@babel/types'
+import authService from '../../services/authService'
 
-const Login = ({ updateLogin }) => {
+const Register = () => {
   const [showModalError, setShowModalError] = useState(false)
-  const LoginSchema = Yup.object().shape({
+  const RegisterSchema = Yup.object().shape({
     email: Yup.string()
       .email()
       .required(),
     cpf: Yup.string().required(),
-    telefone: Yup.string().required(),
-    nascimento: Yup.string().required(),
-    senha: Yup.string().required(),
-    confirmacao: Yup.string().required(),
+    birthDate: Yup.date().required(),
+    cell: Yup.string().required(),
   })
 
   const registerForm = [
@@ -50,31 +47,31 @@ const Login = ({ updateLogin }) => {
       key: 1,
       field: 'name',
       name: 'Nome',
-      keyboardType: 'text',
+      keyboardType: 'default',
     },
     {
       key: 2,
       field: 'birthDate',
       name: 'Data de nascimento',
-      keyboardType: 'text',
+      keyboardType: 'number-pad',
     },
     {
       key: 3,
       field: 'email',
       name: 'E-mail',
-      keyboardType: 'text',
+      keyboardType: 'default',
     },
     {
       key: 4,
       field: 'cpf',
       name: 'CPF',
-      keyboardType: 'text',
+      keyboardType: 'number-pad',
     },
     {
       key: 5,
-      field: 'cellphone',
+      field: 'cell',
       name: 'Celular',
-      keyboardType: 'text',
+      keyboardType: 'phone-pad',
     },
   ]
 
@@ -95,9 +92,13 @@ const Login = ({ updateLogin }) => {
     }, formikProps)
   }
 
-  const requestRegister = async () => {
-    updateLogin({
-      token: 't=este',
+  const requestRegister = async ({ name, birthDate, email, cpf, cell }) => {
+    const { token } = await authService.register({
+      name,
+      birthDate,
+      email,
+      cpf,
+      cell,
     })
   }
 
@@ -109,12 +110,11 @@ const Login = ({ updateLogin }) => {
       style={containerCenter()}
     >
       <SafeAreaView style={containerSafeArea()}>
-        {/* <KeyboardAvoidingView behavior={'padding'}> */}
         <ScrollView showsVerticalScrollIndicator={false}>
           <ModalError
             isVisible={showModalError}
             title="Ops!"
-            message={`Seu cadastro não foi encontrado, \n passa no RH!`}
+            message={`Seu cadastro não foi encontrado.`}
             onPressClose={() => setShowModalError(false)}
           />
           <View style={containerLogo()}>
@@ -127,14 +127,14 @@ const Login = ({ updateLogin }) => {
           <View style={containerForm()}>
             <Formik
               initialValues={{
-                name: '',
-                birthDate: '',
-                email: '',
-                cpf: '',
-                cell: '',
+                name: 'Gabriel',
+                birthDate: '17051996',
+                email: 'bielvenegas@hotmail.com',
+                cpf: '34431948856',
+                cell: '27998479940',
               }}
               onSubmit={requestRegister}
-              validationSchema={LoginSchema}
+              validationSchema={RegisterSchema}
             >
               {formikProps => (
                 <>
@@ -158,7 +158,6 @@ const Login = ({ updateLogin }) => {
             </Formik>
           </View>
         </ScrollView>
-        {/* </KeyboardAvoidingView> */}
       </SafeAreaView>
     </LinearGradient>
   )
@@ -179,4 +178,4 @@ const mapDispatchToProps = dispatch =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Login)
+)(Register)

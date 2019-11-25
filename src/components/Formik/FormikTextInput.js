@@ -37,6 +37,7 @@ const FormikTextInput = ({
         placeholder={placeholder}
         secureTextEntry={secureTextEntry}
         keyboardType={keyboardType || 'default'}
+        autoCapitalize="none"
       />
       {touched[name] && errors[name] && (
         <Text

@@ -1,3 +1,3 @@
 export default {
-  API_URL: 'http://192.168.0.5:3001',
+  API_URL: 'http://madonna:8089/api/',
 }

@@ -4,7 +4,7 @@ import hardSet from 'redux-persist/lib/stateReconciler/hardSet'
 
 import reducers from './ducks'
 import AsyncStorage from '@react-native-community/async-storage'
-
+import reactotron from '../utils/reactotron'
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
@@ -15,7 +15,10 @@ const persistConfig = {
 let persistedReducer = persistReducer(persistConfig, reducers)
 
 const setupRedux = () => {
-  const store = createStore(persistedReducer)
+  const store = createStore(
+    persistedReducer,
+    __DEV__ ? reactotron.createEnhancer() : undefined
+  )
   const persistor = persistStore(store)
   return { store, persistor }
 }

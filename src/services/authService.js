@@ -10,11 +10,13 @@ export default {
       })
       .then(({ data }) => data)
   },
-  register: async (name, email, password) => {
-    return axios.post(env.API_URL + '/user/register', {
+  register: async ({ name, birthDate, email, cpf, cell }) => {
+    return axios.post(env.API_URL + 'account/register', {
       name,
       email,
-      password,
+      birthDate,
+      cpf,
+      cell,
     })
   },
 }
