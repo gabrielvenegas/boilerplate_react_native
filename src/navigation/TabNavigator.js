@@ -25,70 +25,69 @@ const tabBarOptions = {
   inactiveBackgroundColor: colors.white,
 }
 
-const TabNavigator = createBottomTabNavigator(
-  {
-    MyProfile: {
-      screen: Home,
-      navigationOptions: {
-        title: 'Perfil',
-        tabBarOptions,
-        tabBarIcon: () => (
-          <MaterialCommunityIcons
-            name="account"
-            size={25}
-            color={colors.lightblue}
-          />
-        ),
-        keyboardHidesTabBar: false,
-      },
-    },
-    Hours: {
-      screen: Home,
-      navigationOptions: {
-        title: 'Ponto',
-        tabBarOptions,
-        tabBarIcon: () => (
-          <MaterialIcons name="timer" size={25} color={colors.lightblue} />
-        ),
-        keyboardHidesTabBar: false,
-      },
-    },
-    Home: {
-      screen: Home,
-      navigationOptions: {
-        tabBarOptions,
-        tabBarIcon: () => (
-          <FontAwesome name="home" size={25} color={colors.lightblue} />
-        ),
-        keyboardHidesTabBar: false,
-      },
-    },
-    Activities: {
-      screen: Home,
-      navigationOptions: {
-        title: 'Atividades',
-        tabBarOptions,
-        tabBarIcon: () => (
-          <FontAwesome5 name="tasks" size={25} color={colors.lightblue} />
-        ),
-        keyboardHidesTabBar: false,
-      },
-    },
-    Calendar: {
-      screen: Home,
-      navigationOptions: {
-        title: 'Calendário',
-        tabBarOptions,
-        tabBarIcon: () => (
-          <Octicons name="calendar" size={25} color={colors.lightblue} />
-        ),
-        keyboardHidesTabBar: false,
-      },
-    },
-  },
-  {
-    initialRouteName,
-  }
-)
+const TabNavigator = createBottomTabNavigator()
+// {
+//   MyProfile: {
+//     screen: Home,
+//     navigationOptions: {
+//       title: 'Perfil',
+//       tabBarOptions,
+//       tabBarIcon: () => (
+//         <MaterialCommunityIcons
+//           name="account"
+//           size={25}
+//           color={colors.lightblue}
+//         />
+//       ),
+//       keyboardHidesTabBar: false,
+//     },
+//   },
+//   Hours: {
+//     screen: Home,
+//     navigationOptions: {
+//       title: 'Ponto',
+//       tabBarOptions,
+//       tabBarIcon: () => (
+//         <MaterialIcons name="timer" size={25} color={colors.lightblue} />
+//       ),
+//       keyboardHidesTabBar: false,
+//     },
+//   },
+//   Home: {
+//     screen: Home,
+//     navigationOptions: {
+//       tabBarOptions,
+//       tabBarIcon: () => (
+//         <FontAwesome name="home" size={25} color={colors.lightblue} />
+//       ),
+//       keyboardHidesTabBar: false,
+//     },
+//   },
+//   Activities: {
+//     screen: Home,
+//     navigationOptions: {
+//       title: 'Atividades',
+//       tabBarOptions,
+//       tabBarIcon: () => (
+//         <FontAwesome5 name="tasks" size={25} color={colors.lightblue} />
+//       ),
+//       keyboardHidesTabBar: false,
+//     },
+//   },
+//   Calendar: {
+//     screen: Home,
+//     navigationOptions: {
+//       title: 'Calendário',
+//       tabBarOptions,
+//       tabBarIcon: () => (
+//         <Octicons name="calendar" size={25} color={colors.lightblue} />
+//       ),
+//       keyboardHidesTabBar: false,
+//     },
+//   },
+// },
+// {
+//   initialRouteName,
+// }
 
 export default createAppContainer(TabNavigator)

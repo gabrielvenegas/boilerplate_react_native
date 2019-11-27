@@ -9,6 +9,7 @@ const black = 'black'
 const darkGray = '#353535'
 const silverBlue = '#276877'
 const limeGreen = '#92d14f'
+const yellow = '#ffcd04'
 
 export default {
   pink,
@@ -22,4 +23,5 @@ export default {
   darkGray,
   silverBlue,
   limeGreen,
+  yellow,
 }

@@ -1,9 +1,9 @@
 import colors from '../../constants/colors'
-const input = () => {
+const input = (rounded = true) => {
   return {
     backgroundColor: colors.white,
     padding: 7,
-    borderRadius: 30,
+    borderRadius: rounded ? 30 : 0,
     fontSize: 16,
   }
 }

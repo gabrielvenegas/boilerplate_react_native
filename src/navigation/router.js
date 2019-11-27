@@ -1,21 +1,27 @@
-import React, { Component } from 'react'
-import Home from '../screens/Home'
-import Login from '../screens/Login'
 import { createDrawerNavigator } from 'react-navigation-drawer'
-import SideMenu from '../components/SideMenu'
+import { SideMenu } from '../components/SideMenu'
 import { createAppContainer } from 'react-navigation'
+import {
+  Home,
+  About,
+  Profile,
+  Mock,
+  StudyPlan,
+  Performance,
+  Channel,
+  TipsInfo,
+} from '../screens/'
+
 const DrawerSideMenu = createDrawerNavigator(
   {
     Home,
-    Login,
-    // Mock,
-    // StudyPlan,
-    // Performance,
-    // Channel,
-    // TipsInfo,
-    // About,
-    // Profile,
-    // Logout,
+    About,
+    Profile,
+    Mock,
+    StudyPlan,
+    Performance,
+    Channel,
+    TipsInfo,
   },
   {
     contentComponent: SideMenu,

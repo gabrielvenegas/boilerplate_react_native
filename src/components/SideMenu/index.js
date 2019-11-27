@@ -7,75 +7,75 @@ import LinearGradient from 'react-native-linear-gradient'
 import colors from '../../constants/colors'
 import { Avatar, Icon } from 'react-native-elements'
 
+const listMenu = [
+  {
+    name: 'Home',
+    route: 'Home',
+    icon: 'home',
+  },
+  {
+    name: 'Simulados',
+    route: 'Mock',
+    icon: 'list',
+  },
+  {
+    name: 'Planos de Estudo',
+    route: 'StudyPlan',
+    icon: 'library-books',
+  },
+  {
+    name: 'Desempenho',
+    route: 'Performance',
+    icon: 'show-chart',
+  },
+  {
+    name: 'Canal Praticando',
+    route: 'Channel',
+    icon: 'play-arrow',
+  },
+  {
+    name: 'Dicas e Informações',
+    route: 'TipsInfo',
+    icon: 'help-outline',
+  },
+  {
+    name: 'Sobre o App',
+    route: 'About',
+    icon: 'info-outline',
+  },
+  {
+    name: 'Meus Dados',
+    route: 'Profile',
+    icon: 'person',
+  },
+  {
+    name: 'Sair',
+    route: 'Login',
+    icon: 'exit-to-app',
+  },
+]
+
+const menu = navigation => {
+  return listMenu.map(({ name, route, icon }, index) => {
+    return (
+      <TouchableNativeFeedback key={index} style={{ flexDirection: 'row' }}>
+        <View style={styles.menuIcon}>
+          <Icon name={icon} type="material" />
+        </View>
+        <View style={styles.navItem}>
+          <Text
+            style={styles.navItemText}
+            onPress={() => navigation.navigate(route)}
+          >
+            {name}
+          </Text>
+        </View>
+      </TouchableNativeFeedback>
+    )
+  })
+}
+
 const SideMenu = ({ navigation }) => {
-  const menu = () => {
-    const listMenu = [
-      {
-        name: 'Home',
-        route: 'Home',
-        icon: 'home',
-      },
-      {
-        name: 'Simulados',
-        route: 'Mock',
-        icon: 'list',
-      },
-      {
-        name: 'Planos de Estudo',
-        route: 'StudyPlan',
-        icon: 'library-books',
-      },
-      {
-        name: 'Desempenho',
-        route: 'Performance',
-        icon: 'show-chart',
-      },
-      {
-        name: 'Canal Praticando',
-        route: 'Channel',
-        icon: 'play-arrow',
-      },
-      {
-        name: 'Dicas e Informações',
-        route: 'TipsInfo',
-        icon: 'help-outline',
-      },
-      {
-        name: 'Sobre o App',
-        route: 'About',
-        icon: 'info-outline',
-      },
-      {
-        name: 'Meus Dados',
-        route: 'Profile',
-        icon: 'person',
-      },
-      {
-        name: 'Sair',
-        route: 'Login',
-        icon: 'exit-to-app',
-      },
-    ]
-
-    return listMenu.map(({ name, route, icon }, index) => {
-      return (
-        <TouchableNativeFeedback key={index} style={{ flexDirection: 'row' }}>
-          <View style={styles.menuIcon}>
-            <Icon name={icon} type="material" />
-          </View>
-          <View style={styles.navItem}>
-            <Text
-              style={styles.navItemText}
-              onPress={() => navigation.navigate(route)}
-            >
-              {name}
-            </Text>
-          </View>
-        </TouchableNativeFeedback>
-      )
-    })
-  }
-
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -100,7 +100,7 @@ const SideMenu = ({ navigation }) => {
         </View>
       </LinearGradient>
       <ScrollView>
-        <View>{menu()}</View>
+        <View>{menu(navigation)}</View>
       </ScrollView>
     </View>
   )
@@ -110,4 +110,4 @@ SideMenu.propTypes = {
   navigation: PropTypes.object,
 }
 
-export default SideMenu
+export { SideMenu, listMenu }

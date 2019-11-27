@@ -9,6 +9,7 @@ const { store, persistor } = setupRedux()
 import { PersistGate } from 'redux-persist/integration/react'
 import DrawerSideMenu from './src/navigation/drawer'
 import 'react-native-gesture-handler'
+import AuthStack from './src/navigation/AuthStack'
 if (__DEV__) {
   import('./src/utils/reactotron')
 }
@@ -19,6 +20,7 @@ const App = () => {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <DrawerSideMenu />
+          {/* <AuthStack /> */}
         </PersistGate>
       </Provider>
     </>
