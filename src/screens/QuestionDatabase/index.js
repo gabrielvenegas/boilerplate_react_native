@@ -4,6 +4,8 @@ import { View, Text, Dimensions } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import colors from '../../constants/colors'
 import QDComponent from '../../components/QDComponent'
+import SafeAreaView from 'react-native-safe-area-view'
+import { ScrollView } from 'react-native-gesture-handler'
 
 const QuestionDatabase = ({ navigation }) => {
   return (
@@ -19,9 +21,9 @@ const QuestionDatabase = ({ navigation }) => {
         end={{ x: 1, y: 1 }}
         colors={[colors.darkGray, colors.silverBlue, colors.darkGray]}
       >
-        <View>
+        <ScrollView>
           <QDComponent />
-        </View>
+        </ScrollView>
       </LinearGradient>
     </View>
   )

@@ -8,6 +8,7 @@ import StudyPlan from './StudyPlan'
 import Performance from './Performance'
 import Channel from './Channel'
 import TipsInfo from './TipsInfo'
+import Detail from './QuestionDatabase/Detail'
 
 export {
   Home,
@@ -20,4 +21,5 @@ export {
   Performance,
   Channel,
   TipsInfo,
+  Detail,
 }

@@ -11,10 +11,13 @@ import {
   Channel,
   TipsInfo,
 } from '../screens/'
+import HomeStack from './HomeStack'
 
 const DrawerSideMenu = createDrawerNavigator(
   {
-    Home,
+    Home: {
+      screen: HomeStack,
+    },
     About,
     Profile,
     Mock,

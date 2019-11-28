@@ -10,6 +10,7 @@ const darkGray = '#353535'
 const silverBlue = '#276877'
 const limeGreen = '#92d14f'
 const yellow = '#ffcd04'
+const lightGray = '#f4f4f4'
 
 export default {
   pink,
@@ -24,4 +25,5 @@ export default {
   silverBlue,
   limeGreen,
   yellow,
+  lightGray,
 }

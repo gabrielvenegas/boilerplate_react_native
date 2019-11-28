@@ -12,16 +12,16 @@ const style = StyleSheet.create({
     borderRadius: 30,
     borderWidth: 3,
     borderColor: colors.yellow,
-    height: 70,
+    height: 55,
   },
   icon: {
-    padding: 7,
+    padding: 3,
   },
   buttonText: {
     ...buttonText(),
-    paddingTop: 12,
+    paddingTop: 4,
     paddingLeft: 30,
-    fontSize: 16,
+    fontSize: 14,
   },
 })
 

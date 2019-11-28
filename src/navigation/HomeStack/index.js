@@ -1,10 +1,10 @@
 import { createStackNavigator } from 'react-navigation-stack'
-import { Home, Mock } from '../../screens'
+import { Home, Detail } from '../../screens'
 
 const HomeStack = createStackNavigator(
   {
     Home,
-    Mock,
+    Detail,
   },
   {
     initialRouteName: 'Home',

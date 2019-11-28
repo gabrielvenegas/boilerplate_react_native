@@ -6,6 +6,7 @@ import colors from '../../constants/colors'
 import { Header, Icon } from 'react-native-elements'
 import { TouchableNativeFeedback } from 'react-native-gesture-handler'
 import { DrawerActions } from 'react-navigation-drawer'
+import {} from 'react-navigation-stack'
 import Subtitle from './Subtitle'
 
 const toggleMenu = navigation => {
@@ -28,7 +29,24 @@ const renderMenuButton = navigation => {
   )
 }
 
-const CustomHeader = ({ navigation, subtitle, showSubtitle = false }) => {
+const renderBackButton = navigation => {
+  return (
+    <View>
+      <TouchableNativeFeedback onPress={() => navigation.goBack()}>
+        <View>
+          <Icon name="arrow-back" size={28} type="material" color="#fff" />
+        </View>
+      </TouchableNativeFeedback>
+    </View>
+  )
+}
+
+const CustomHeader = ({
+  navigation,
+  subtitle,
+  showSubtitle = false,
+  backButton = false,
+}) => {
   return (
     <View>
       <View>
@@ -37,7 +55,11 @@ const CustomHeader = ({ navigation, subtitle, showSubtitle = false }) => {
           barStyle="light-content"
         />
         <Header
-          leftComponent={() => renderMenuButton(navigation)}
+          leftComponent={() =>
+            backButton
+              ? renderBackButton(navigation)
+              : renderMenuButton(navigation)
+          }
           centerComponent={() => renderTopLogoComponent()}
           containerStyle={style.header}
         ></Header>
