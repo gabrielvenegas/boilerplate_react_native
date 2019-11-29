@@ -41,9 +41,9 @@ const Login = ({ login, updateLogin, navigation }) => {
 
   const requestLogin = async ({ email, senha }) => {
     try {
-      const { token } = await authService.login(email, senha)
+      const { access_token } = await authService.login(email, senha, 'password')
       updateLogin({
-        token,
+        token: access_token,
       })
       navigation.navigate('Home')
     } catch (error) {
@@ -58,13 +58,13 @@ const Login = ({ login, updateLogin, navigation }) => {
       colors={[colors.darkGray, colors.silverBlue, colors.darkGray]}
       style={containerCenter()}
     >
-      <SafeAreaView style={containerSafeArea()}>
+      <SafeAreaView style={(containerSafeArea(), { paddingTop: '15%' })}>
         <ModalError
           testID="modalLoginError"
           testIDButtonOk="buttonOkModalLoginError"
           isVisible={showModalError}
           title="Ops!"
-          message={`Seu cadastro não foi encontrado, \n passa no RH!`}
+          message={`Ocorreu um problema ao autenticar. Verifique seu login e senha`}
           onPressClose={() => setShowModalError(false)}
         />
         <KeyboardAvoidingView

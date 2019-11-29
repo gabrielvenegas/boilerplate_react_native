@@ -1,4 +1,5 @@
 import colors from '../../constants/colors'
+import { Dimensions } from 'react-native'
 const input = (rounded = true) => {
   return {
     backgroundColor: colors.white,
@@ -35,7 +36,8 @@ const buttonText = () => {
 const containerCenter = () => {
   return {
     flex: 1,
-    justifyContent: 'center',
+    // justifyContent: 'center',
+    // height: Dimensions.get('window').height,
   }
 }
 

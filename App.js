@@ -19,8 +19,7 @@ const App = () => {
     <>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <DrawerSideMenu />
-          {/* <AuthStack /> */}
+          <AppNavigator />
         </PersistGate>
       </Provider>
     </>

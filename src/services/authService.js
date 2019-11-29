@@ -2,11 +2,11 @@ import axios from 'axios'
 import env from 'boilerplate_app/src/constants/enviroment'
 
 export default {
-  login: async (email, password) => {
+  login: async (username, password, grantType) => {
+    const data = `username=${username}&password=${password}&activeDirectory=true&client_id=consoleApp&grant_type=password`
     return axios
-      .post(env.API_URL + '/user/login', {
-        email,
-        password,
+      .post(`${env.API_URL}token`, data, {
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       })
       .then(({ data }) => data)
   },

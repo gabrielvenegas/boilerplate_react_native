@@ -140,6 +140,7 @@ const Detail = ({ navigation }) => {
                     containerStyle={{
                       borderWidth: 0,
                       backgroundColor: 'transparent',
+                      padding: 7,
                       paddingLeft: 0,
                     }}
                     textStyle={{ fontWeight: 'normal', fontSize: 16 }}

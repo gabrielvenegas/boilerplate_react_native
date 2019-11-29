@@ -12,6 +12,7 @@ import {
   TouchableOpacity,
   View,
   ScrollView,
+  Dimensions,
 } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import { connect } from 'react-redux'
@@ -103,13 +104,14 @@ const Register = () => {
   }
 
   return (
-    <LinearGradient
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 1 }}
-      colors={[colors.darkGray, colors.silverBlue, colors.darkGray]}
-      style={containerCenter()}
-    >
-      <SafeAreaView style={containerSafeArea()}>
+    <View style={containerCenter()}>
+      <LinearGradient
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        colors={[colors.darkGray, colors.silverBlue, colors.darkGray]}
+        style={{ height: Dimensions.get('window').height }}
+      >
+        {/* <SafeAreaView style={containerSafeArea()}> */}
         <ScrollView showsVerticalScrollIndicator={false}>
           <ModalError
             isVisible={showModalError}
@@ -158,8 +160,9 @@ const Register = () => {
             </Formik>
           </View>
         </ScrollView>
-      </SafeAreaView>
-    </LinearGradient>
+        {/* </SafeAreaView> */}
+      </LinearGradient>
+    </View>
   )
 }
 

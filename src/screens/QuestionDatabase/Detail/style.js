@@ -14,11 +14,6 @@ const style = StyleSheet.create({
     paddingBottom: 5,
   },
   input: {
-    // ...input(false),
-    // // backgroundColor: colors.lightGray,
-    // borderRadius: 10,
-    // borderWidth: 1,
-    // borderColor: colors.lightGray,
     backgroundColor: colors.lightGray,
   },
   subtitle: {
