@@ -5,7 +5,6 @@ export const { Types, Creators: LoginCreators } = createActions({
 })
 
 const INITIAL_STATE = {
-  codigo: 0,
   token: '',
 }
 const update = (state = INITIAL_STATE, { data }) => ({
