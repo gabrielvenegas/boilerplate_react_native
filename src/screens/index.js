@@ -9,6 +9,7 @@ import Performance from './Performance'
 import Channel from './Channel'
 import TipsInfo from './TipsInfo'
 import Detail from './QuestionDatabase/Detail'
+import Messages from './Messages'
 
 export {
   Home,
@@ -22,4 +23,5 @@ export {
   Channel,
   TipsInfo,
   Detail,
+  Messages,
 }

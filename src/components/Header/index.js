@@ -4,9 +4,8 @@ import TopLogo from '../TopLogo'
 import { View, StatusBar, Button, Text } from 'react-native'
 import colors from '../../constants/colors'
 import { Header, Icon } from 'react-native-elements'
-import { TouchableNativeFeedback } from 'react-native-gesture-handler'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 import { DrawerActions } from 'react-navigation-drawer'
-import {} from 'react-navigation-stack'
 import Subtitle from './Subtitle'
 
 const toggleMenu = navigation => {
@@ -20,11 +19,11 @@ const renderTopLogoComponent = () => {
 const renderMenuButton = navigation => {
   return (
     <View>
-      <TouchableNativeFeedback onPress={() => toggleMenu(navigation)}>
+      <TouchableOpacity onPress={() => toggleMenu(navigation)}>
         <View>
           <Icon name="menu" type="material" color="#fff" />
         </View>
-      </TouchableNativeFeedback>
+      </TouchableOpacity>
     </View>
   )
 }
@@ -32,11 +31,11 @@ const renderMenuButton = navigation => {
 const renderBackButton = navigation => {
   return (
     <View>
-      <TouchableNativeFeedback onPress={() => navigation.goBack()}>
+      <TouchableOpacity onPress={() => navigation.goBack()}>
         <View>
           <Icon name="arrow-back" size={28} type="material" color="#fff" />
         </View>
-      </TouchableNativeFeedback>
+      </TouchableOpacity>
     </View>
   )
 }
@@ -51,15 +50,15 @@ const CustomHeader = ({
     <View>
       <View>
         <StatusBar
-          backgroundColor={colors.silverBlue}
-          barStyle="light-content"
+        // backgroundColor={colors.silverBlue}
+        // barStyle="light-content"
         />
         <Header
-          leftComponent={() =>
-            backButton
-              ? renderBackButton(navigation)
-              : renderMenuButton(navigation)
-          }
+          // leftComponent={() =>
+          //   backButton
+          //     ? renderBackButton(navigation)
+          //     : renderMenuButton(navigation)
+          // }
           centerComponent={() => renderTopLogoComponent()}
           containerStyle={style.header}
         ></Header>

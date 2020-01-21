@@ -1,8 +1,20 @@
 import React, { Component } from 'react'
-import { Image } from 'react-native'
+import { Text } from 'react-native'
+import colors from '../../constants/colors'
 
 const TopLogo = () => {
-  return <Image source={require('../../assets/img/logo_topo.png')} />
+  return (
+    <Text
+      style={{
+        fontSize: 26,
+        color: colors.black,
+        fontWeight: 'bold',
+        fontStyle: 'italic',
+      }}
+    >
+      Zima
+    </Text>
+  )
 }
 
 export default TopLogo

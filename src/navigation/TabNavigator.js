@@ -1,13 +1,11 @@
 import React from 'react'
-import FontAwesome from 'react-native-vector-icons/FontAwesome'
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
-import Octicons from 'react-native-vector-icons/Octicons'
-import { createAppContainer } from 'react-navigation'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
-import Home from '../screens/Home'
+import { Home, Profile, Messages } from '../screens'
 import colors from '../constants/colors'
+import IconBadge from 'react-native-icon-badge'
+import { Text } from 'react-native'
+import HomeStack from './HomeStack'
 
 const initialRouteName = 'Home'
 
@@ -17,7 +15,7 @@ const tabBarOptions = {
     backgroundColor: colors.white,
   },
   labelStyle: {
-    color: colors.lightblue,
+    color: colors.black,
   },
   activeTintColor: colors.white,
   inactiveTintColor: colors.white,
@@ -25,69 +23,62 @@ const tabBarOptions = {
   inactiveBackgroundColor: colors.white,
 }
 
-const TabNavigator = createBottomTabNavigator()
-// {
-//   MyProfile: {
-//     screen: Home,
-//     navigationOptions: {
-//       title: 'Perfil',
-//       tabBarOptions,
-//       tabBarIcon: () => (
-//         <MaterialCommunityIcons
-//           name="account"
-//           size={25}
-//           color={colors.lightblue}
-//         />
-//       ),
-//       keyboardHidesTabBar: false,
-//     },
-//   },
-//   Hours: {
-//     screen: Home,
-//     navigationOptions: {
-//       title: 'Ponto',
-//       tabBarOptions,
-//       tabBarIcon: () => (
-//         <MaterialIcons name="timer" size={25} color={colors.lightblue} />
-//       ),
-//       keyboardHidesTabBar: false,
-//     },
-//   },
-//   Home: {
-//     screen: Home,
-//     navigationOptions: {
-//       tabBarOptions,
-//       tabBarIcon: () => (
-//         <FontAwesome name="home" size={25} color={colors.lightblue} />
-//       ),
-//       keyboardHidesTabBar: false,
-//     },
-//   },
-//   Activities: {
-//     screen: Home,
-//     navigationOptions: {
-//       title: 'Atividades',
-//       tabBarOptions,
-//       tabBarIcon: () => (
-//         <FontAwesome5 name="tasks" size={25} color={colors.lightblue} />
-//       ),
-//       keyboardHidesTabBar: false,
-//     },
-//   },
-//   Calendar: {
-//     screen: Home,
-//     navigationOptions: {
-//       title: 'Calendário',
-//       tabBarOptions,
-//       tabBarIcon: () => (
-//         <Octicons name="calendar" size={25} color={colors.lightblue} />
-//       ),
-//       keyboardHidesTabBar: false,
-//     },
-//   },
-// },
-// {
-//   initialRouteName,
-// }
+const TabNavigator = createBottomTabNavigator(
+  {
+    MyProfile: {
+      screen: Profile,
+      navigationOptions: {
+        title: 'Perfil',
+        tabBarOptions,
+        tabBarIcon: () => (
+          <MaterialCommunityIcons
+            name="account"
+            size={25}
+            color={colors.black}
+          />
+        ),
+        keyboardHidesTabBar: false,
+      },
+    },
+    Home: {
+      screen: HomeStack,
+      navigationOptions: {
+        title: 'Ofertas',
+        tabBarOptions,
+        tabBarIcon: () => (
+          <MaterialCommunityIcons name="home" size={25} color={colors.black} />
+        ),
+        keyboardHidesTabBar: false,
+      },
+    },
+    Message: {
+      screen: Messages,
+      navigationOptions: {
+        title: 'Mesagens',
+        tabBarOptions,
+        tabBarIcon: () => (
+          <IconBadge
+            MainElement={
+              <MaterialCommunityIcons
+                name="email-outline"
+                size={25}
+                color={colors.black}
+              />
+            }
+            BadgeElement={<Text style={{ color: 'white' }}>10</Text>}
+            IconBadgeStyle={{
+              left: 15,
+              top: -4,
+            }}
+          />
+        ),
+        keyboardHidesTabBar: false,
+      },
+    },
+  },
+  {
+    initialRouteName,
+  }
+)
 
-export default createAppContainer(TabNavigator)
+export default TabNavigator

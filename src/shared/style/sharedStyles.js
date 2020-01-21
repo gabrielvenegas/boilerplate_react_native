@@ -1,11 +1,10 @@
 import colors from '../../constants/colors'
-import { Dimensions } from 'react-native'
-const input = (rounded = true) => {
+const input = (rounded = false) => {
   return {
-    backgroundColor: colors.white,
-    padding: 7,
-    borderRadius: rounded ? 30 : 0,
+    padding: 15,
+    borderRadius: rounded ? 20 : 0,
     fontSize: 16,
+    borderBottomWidth: 1,
   }
 }
 
@@ -16,11 +15,11 @@ const input = (rounded = true) => {
 const button = (bg = 'transparent') => {
   return {
     backgroundColor: bg,
-    padding: 10,
-    marginTop: 15,
-    borderRadius: 30,
+    padding: 15,
     borderWidth: 1,
-    borderColor: colors.white,
+    borderColor: colors.black,
+    marginTop: 10,
+    marginBottom: 10,
   }
 }
 
@@ -29,15 +28,13 @@ const buttonText = () => {
     textAlign: 'center',
     textTransform: 'uppercase',
     fontSize: 14,
-    color: colors.white,
+    color: colors.black,
   }
 }
 
 const containerCenter = () => {
   return {
     flex: 1,
-    // justifyContent: 'center',
-    // height: Dimensions.get('window').height,
   }
 }
 
@@ -63,7 +60,7 @@ const containerSafeArea = () => {
 const label = () => {
   return {
     color: colors.white,
-    marginTop: 5,
+    marginBottom: -10,
   }
 }
 

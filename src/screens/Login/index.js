@@ -13,6 +13,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  ScrollView,
 } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import { connect } from 'react-redux'
@@ -33,111 +34,91 @@ import authService from '../../services/authService'
 const Login = ({ login, updateLogin, navigation }) => {
   const [showModalError, setShowModalError] = useState(false)
   const LoginSchema = Yup.object().shape({
-    email: Yup.string()
-      .email()
-      .required(),
-    senha: Yup.string().required(),
+    email: Yup.string().email(),
+    // .required(),
+    senha: Yup.string(),
   })
 
   const requestLogin = async ({ email, senha }) => {
     try {
-      const { access_token } = await authService.login(email, senha, 'password')
-      updateLogin({
-        token: access_token,
-      })
-      navigation.navigate('Home')
+      // const { access_token } = await authService.login(email, senha, 'password')
+      // updateLogin({
+      //   token: access_token,
+      // })
+      navigation.navigate('Register')
     } catch (error) {
       setShowModalError(true)
     }
   }
 
   return (
-    <LinearGradient
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 1 }}
-      colors={[colors.darkGray, colors.silverBlue, colors.darkGray]}
-      style={containerCenter()}
-    >
-      <SafeAreaView style={(containerSafeArea(), { paddingTop: '15%' })}>
-        <ModalError
-          testID="modalLoginError"
-          testIDButtonOk="buttonOkModalLoginError"
-          isVisible={showModalError}
-          title="Ops!"
-          message={`Ocorreu um problema ao autenticar. Verifique seu login e senha`}
-          onPressClose={() => setShowModalError(false)}
-        />
-        <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'undefined'}
-          style={containerForm()}
-        >
-          <View style={containerLogo()}>
-            <Image
-              source={images.logo}
-              style={styles.logo}
-              resizeMode="contain"
-            />
-          </View>
+    <ScrollView style={containerSafeArea()}>
+      <ModalError
+        testID="modalLoginError"
+        testIDButtonOk="buttonOkModalLoginError"
+        isVisible={showModalError}
+        title="Ops!"
+        message={`Ocorreu um problema ao autenticar. Verifique seu login e senha`}
+        onPressClose={() => setShowModalError(false)}
+      />
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'undefined'}
+        style={containerForm()}
+      >
+        <View style={containerLogo()}>
+          <Image
+            source={images.logo}
+            style={styles.logo}
+            resizeMode="contain"
+          />
+        </View>
 
-          <Formik
-            initialValues={{ email: '', senha: '' }}
-            onSubmit={requestLogin}
-            validationSchema={LoginSchema}
-          >
-            {formikProps => (
-              <View style={styles.containerForm}>
-                <FormikTextInput
-                  testID="emailField"
-                  testIDErrorText="emailErrorText"
-                  name="email"
-                  keyboardType="email-address"
-                  {...formikProps}
-                  style={input()}
-                  errorStyle={{ borderBottomColor: '#FF4140' }}
-                  placeholder="E-mail"
-                />
-                <FormikTextInput
-                  testID="passwordField"
-                  testIDErrorText="passwordErrorText"
-                  name="senha"
-                  secureTextEntry
-                  {...formikProps}
-                  style={styles.passwordField}
-                  errorStyle={{ borderBottomColor: '#FF4140' }}
-                  placeholder="Senha"
-                />
-                <TouchableOpacity
-                  testID="loginButton"
-                  style={button(colors.lightblue)}
-                  onPress={formikProps.handleSubmit}
-                >
-                  <Text style={buttonText()}>Entrar</Text>
-                </TouchableOpacity>
-                <Link
-                  testID="registerButton"
-                  to="Register"
-                  style={button(colors.limeGreen)}
-                >
-                  <Text style={buttonText()}>Registrar</Text>
-                </Link>
-              </View>
-            )}
-          </Formik>
-          <View style={styles.optionButton}>
-            <View>
-              <Link>
-                <Text style={{ color: colors.white }}>Como funciona</Text>
-              </Link>
+        <Formik
+          initialValues={{ email: '', senha: '' }}
+          onSubmit={requestLogin}
+          validationSchema={LoginSchema}
+        >
+          {formikProps => (
+            <View style={styles.containerForm}>
+              <FormikTextInput
+                testID="emailField"
+                testIDErrorText="emailErrorText"
+                name="name"
+                keyboardType="email-address"
+                {...formikProps}
+                style={input()}
+                errorStyle={{ borderBottomColor: '#FF4140' }}
+                placeholder="Nome"
+              />
+              <FormikTextInput
+                testID="passwordField"
+                testIDErrorText="passwordErrorText"
+                name="email"
+                secureTextEntry
+                {...formikProps}
+                style={styles.passwordField}
+                errorStyle={{ borderBottomColor: '#FF4140' }}
+                placeholder="E-mail"
+              />
+              <TouchableOpacity
+                testID="loginButton"
+                style={button()}
+                onPress={formikProps.handleSubmit}
+              >
+                <Text style={buttonText()}>Entrar</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                testID="loginButton"
+                style={button()}
+                onPress={formikProps.handleSubmit}
+              >
+                <Text style={buttonText()}>Entrar com Facebook</Text>
+              </TouchableOpacity>
             </View>
-            <View>
-              <Link>
-                <Text style={{ color: colors.white }}>Recuperar senha</Text>
-              </Link>
-            </View>
-          </View>
-        </KeyboardAvoidingView>
-      </SafeAreaView>
-    </LinearGradient>
+          )}
+        </Formik>
+      </KeyboardAvoidingView>
+    </ScrollView>
   )
 }
 

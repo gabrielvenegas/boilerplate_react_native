@@ -3,11 +3,12 @@ import colors from '../../constants/colors'
 
 const style = StyleSheet.create({
   container: {
-    padding: 10,
+    paddingTop: '40%',
   },
   label: {
-    color: colors.silverBlue,
-    fontSize: 14,
+    color: colors.black,
+    fontSize: 18,
+    paddingTop: 5,
   },
 })
 

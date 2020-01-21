@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { ScrollView, Text, View } from 'react-native'
 import styles from './style'
-import { TouchableNativeFeedback } from 'react-native-gesture-handler'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 import LinearGradient from 'react-native-linear-gradient'
 import colors from '../../constants/colors'
 import { Avatar, Icon } from 'react-native-elements'
@@ -14,51 +14,26 @@ const listMenu = [
     icon: 'home',
   },
   {
-    name: 'Simulados',
+    name: 'Compras',
     route: 'Mock',
     icon: 'list',
   },
   {
-    name: 'Planos de Estudo',
+    name: 'Perfil',
     route: 'StudyPlan',
     icon: 'library-books',
   },
   {
-    name: 'Desempenho',
+    name: 'Sair',
     route: 'Performance',
     icon: 'show-chart',
-  },
-  {
-    name: 'Canal Praticando',
-    route: 'Channel',
-    icon: 'play-arrow',
-  },
-  {
-    name: 'Dicas e Informações',
-    route: 'TipsInfo',
-    icon: 'help-outline',
-  },
-  {
-    name: 'Sobre o App',
-    route: 'About',
-    icon: 'info-outline',
-  },
-  {
-    name: 'Meus Dados',
-    route: 'Profile',
-    icon: 'person',
-  },
-  {
-    name: 'Sair',
-    route: 'Login',
-    icon: 'exit-to-app',
   },
 ]
 
 const menu = navigation => {
   return listMenu.map(({ name, route, icon }, index) => {
     return (
-      <TouchableNativeFeedback key={index} style={{ flexDirection: 'row' }}>
+      <TouchableOpacity key={index} style={{ flexDirection: 'row' }}>
         <View style={styles.menuIcon}>
           <Icon name={icon} type="material" />
         </View>
@@ -70,7 +45,7 @@ const menu = navigation => {
             {name}
           </Text>
         </View>
-      </TouchableNativeFeedback>
+      </TouchableOpacity>
     )
   })
 }
@@ -78,27 +53,20 @@ const menu = navigation => {
 const SideMenu = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <LinearGradient
-        start={{ x: 0, y: 1 }}
-        end={{ x: 1, y: 0 }}
-        colors={[colors.darkGray, colors.silverBlue]}
-        style={styles.cardPhoto}
-      >
-        <View style={styles.topAvatar}>
-          <Avatar
-            rounded
-            size="large"
-            containerStyle={{ borderWidth: 2, borderColor: '#f0b008' }}
-            source={{
-              uri:
-                'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-            }}
-          />
-        </View>
-        <View style={styles.topUserName}>
-          <Text style={styles.topUserNameText}>Olá, Gabriel</Text>
-        </View>
-      </LinearGradient>
+      <View style={styles.topAvatar}>
+        <Avatar
+          rounded
+          size="large"
+          containerStyle={{ borderWidth: 2, borderColor: '#f0b008' }}
+          source={{
+            uri:
+              'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+          }}
+        />
+      </View>
+      <View style={styles.topUserName}>
+        <Text style={styles.topUserNameText}>Olá, Gabriel</Text>
+      </View>
       <ScrollView>
         <View>{menu(navigation)}</View>
       </ScrollView>
